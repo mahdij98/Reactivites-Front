@@ -1,17 +1,15 @@
 import { Button, Card, Icon, Image } from "semantic-ui-react";
-import { Activity } from "../../../app/models/activity";
+import { useStore } from "../../../stores/store";
 
-interface Props {
-  activity: Activity;
-  cancelSelectActivity: () => void;
-  openForm: (id: string) => void;
-}
+const ActivityDetailes = () => {
+  const { activityStore } = useStore();
+  const {
+    selectedActivity: activity,
+    openForm,
+    cancleSelectedActivity,
+  } = activityStore;
 
-const ActivityDetailes = ({
-  activity,
-  openForm,
-  cancelSelectActivity,
-}: Props) => {
+  if (!activity) return;
   return (
     <Card fluid>
       <Image
@@ -37,7 +35,7 @@ const ActivityDetailes = ({
             }}
           />
           <Button
-            onClick={cancelSelectActivity}
+            onClick={cancleSelectedActivity}
             basic
             color="grey"
             content="Cancle"

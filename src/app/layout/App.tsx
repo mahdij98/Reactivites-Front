@@ -22,7 +22,7 @@ const App = () => {
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    activityStore.loadActivities();
+    const mirza = activityStore.loadActivities();
   }, [activityStore]);
 
   const handleEditOrAddActivitiy = (activity: Activity) => {
@@ -60,38 +60,16 @@ const App = () => {
     });
   };
 
-  const handleSelectedActivity = (id?: string) => {
-    setSelectedActivities(activities.find((a) => a.id === id));
-  };
-
-  const handleCancleSelectedActivity = () => {
-    setSelectedActivities(undefined);
-  };
-
-  const handleFormOpen = (id?: string) => {
-    id ? handleSelectedActivity(id) : handleCancleSelectedActivity();
-    setEidteMode(true);
-  };
-  const handleFormClose = () => {
-    setEidteMode(false);
-  };
-
   if (activityStore.loadingInitial)
     return <LoadingComponent content="Loading app" />;
 
   return (
     <>
-      <NavBar openForm={handleFormOpen} />
+      <NavBar />
       <Container style={{ marginTop: "7em" }}>
         <ActivityDashboard
           activities={activityStore.activities ?? []}
-          selectActivity={handleSelectedActivity}
-          selectedActivity={selectedActivities}
-          cancelSelectActivity={handleCancleSelectedActivity}
           handleDeleteActivity={handleDeleteActivity}
-          editMode={eidteMode}
-          openForm={handleFormOpen}
-          closeForm={handleFormClose}
           handleEditOrAddActivitiy={handleEditOrAddActivitiy}
           isSubmiting={submiting}
           isDeleting={deleting}

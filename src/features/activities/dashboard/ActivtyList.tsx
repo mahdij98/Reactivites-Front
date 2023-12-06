@@ -1,21 +1,23 @@
 import { useState } from "react";
 import { Activity } from "../../../app/models/activity";
 import { Button, Item, Label, Segment } from "semantic-ui-react";
+import { useStore } from "../../../stores/store";
 
 interface Props {
   activities: Activity[];
-  selectActivity: (id: string) => void;
   handleDeleteActivity: (id: string) => void;
   isDeleting: boolean;
 }
 
 const ActivtyList = ({
   activities,
-  selectActivity,
   handleDeleteActivity,
   isDeleting,
 }: Props) => {
   const [target, setTarget] = useState("");
+
+  const { activityStore } = useStore();
+  const { selectActivity } = activityStore;
   return (
     <Segment>
       <Item.Group>
