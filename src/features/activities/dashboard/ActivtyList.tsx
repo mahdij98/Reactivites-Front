@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Button, Item, Label, Segment } from "semantic-ui-react";
 import { useStore } from "../../../stores/store";
 import { observer } from "mobx-react-lite";
+import { Link } from "react-router-dom";
 
 const ActivtyList = () => {
   const [target, setTarget] = useState("");
 
   const { activityStore } = useStore();
-  const { selectActivity, deleteActivity, loading, activityByDate } =
-    activityStore;
+  const { deleteActivity, loading, activityByDate } = activityStore;
 
   return (
     <Segment>
@@ -26,9 +26,8 @@ const ActivtyList = () => {
               </Item.Description>
               <Item.Extra>
                 <Button
-                  onClick={() => {
-                    selectActivity(activity.id);
-                  }}
+                  as={Link}
+                  to={`/activities/${activity.id}`}
                   floated="right"
                   content="view"
                   color="blue"
