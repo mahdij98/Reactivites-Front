@@ -15,9 +15,10 @@ const App = () => {
       <Container style={{ marginTop: "7em" }}>
         <Routes>
           <Route path="/" Component={HomePgae} />
-          <Route path="/activities" Component={(Activi = tyDashboard)} />
+          <Route path="/activities" Component={ActivityDashboard} />
           <Route path="/activities/:id" Component={ActivityDetailes} />
           <Route path="/creatActivity" Component={ActivityForm} />
+          <Route path="/manage/:id" Component={ActivityForm} />
         </Routes>
       </Container>
     </>
