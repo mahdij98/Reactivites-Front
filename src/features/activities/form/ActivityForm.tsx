@@ -15,6 +15,7 @@ const ActivityForm = () => {
     loadActivity,
     loadingInitial,
   } = activityStore;
+
   const { id } = useParams<{ id: string }>();
 
   const [activity, setActivity] = useState({
