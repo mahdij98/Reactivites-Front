@@ -3,8 +3,10 @@ import { Button, Form, Segment } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
 import { useStore } from "../../../stores/store";
 import { observer } from "mobx-react-lite";
-import { useParams } from "react-router";
+import { useNavigate, useNavigation, useParams } from "react-router";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { Link } from "react-router-dom";
+import uuid from "react-uuid";
 
 const ActivityForm = () => {
   const { activityStore } = useStore();
@@ -17,6 +19,7 @@ const ActivityForm = () => {
   } = activityStore;
 
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
   const [activity, setActivity] = useState({
     id: "",
@@ -30,10 +33,20 @@ const ActivityForm = () => {
 
   useEffect(() => {
     if (id) loadActivity(id).then((activity) => setActivity(activity!));
+    console.log("my id is " + id);
   }, [id, loadActivity]);
 
   const handleSubmit = () => {
-    activity.id ? updateActivity(activity) : creatActivity(activity);
+    if (activity.id.length === 0) {
+      const newActivity = { ...activity, id: uuid() };
+      creatActivity(newActivity).then(() =>
+        navigate(`/activities/${newActivity.id}`)
+      );
+    } else {
+      updateActivity(activity).then(() =>
+        navigate(`/activities/${activity.id}`)
+      );
+    }
   };
 
   const handleInputChange = (
@@ -92,7 +105,13 @@ const ActivityForm = () => {
           type="submit"
           content="Submit"
         />
-        <Button floated="right" type="button" content="Cancle" />
+        <Button
+          as={Link}
+          to={id ? `/activities/${id}` : "/activities"}
+          floated="right"
+          type="button"
+          content="Cancle"
+        />
       </Form>
     </Segment>
   );

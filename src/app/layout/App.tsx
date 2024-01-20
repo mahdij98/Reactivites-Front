@@ -17,8 +17,14 @@ const App = () => {
           <Route path="/" Component={HomePgae} />
           <Route path="/activities" Component={ActivityDashboard} />
           <Route path="/activities/:id" Component={ActivityDetailes} />
-          <Route path="/creatActivity" Component={ActivityForm} />
-          <Route path="/manage/:id" Component={ActivityForm} />
+          <Route
+            path="/creatActivity"
+            Component={() => <ActivityForm key="create" />}
+          />
+          <Route
+            path="/manage/:id"
+            Component={() => <ActivityForm key="update" />}
+          />
         </Routes>
       </Container>
     </>
