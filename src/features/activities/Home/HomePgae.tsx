@@ -15,7 +15,7 @@ const HomePgae = () => {
           Reactivites
         </Header>
         <Header as="h2" inverted content="Welcome to Reactivites" />
-        <Button as={Link} to="/activities" size="huge" inverted>
+        <Button as={Link} to="/activities" size="big" inverted>
           Take me to the Activities!
         </Button>
       </Container>

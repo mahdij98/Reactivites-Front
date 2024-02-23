@@ -7,13 +7,13 @@ import { Route, Routes } from "react-router-dom";
 import HomePgae from "../../features/activities/Home/HomePgae";
 import ActivityForm from "../../features/activities/form/ActivityForm";
 import ActivityDetailes from "../../features/activities/detailes/ActivityDetailes";
+import Layout from "./Layout";
 
 const App = () => {
   return (
     <>
-      <NavBar />
-      <Container style={{ marginTop: "7em" }}>
-        <Routes>
+      <Routes>
+        <Route element={<Layout />}>
           <Route path="/" Component={HomePgae} />
           <Route path="/activities" Component={ActivityDashboard} />
           <Route path="/activities/:id" Component={ActivityDetailes} />
@@ -25,8 +25,8 @@ const App = () => {
             path="/manage/:id"
             Component={() => <ActivityForm key="update" />}
           />
-        </Routes>
-      </Container>
+        </Route>
+      </Routes>
     </>
   );
 };
